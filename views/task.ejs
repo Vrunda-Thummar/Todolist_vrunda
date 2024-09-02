@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+    <style>
+        .checkbox
+        {
+            width: 18px;
+            height: 18px;
+        }
+    </style>
+</head>
+<body style="background-image: linear-gradient(to right, cadetblue, rgb(173, 77, 154));">
+
+    <h1 style="text-align: center; margin-top: 35px;">Your Tasks</h1>
+   
+    <!-- Form to add a new task -->
+    <form action="/tasks" method="POST" style="text-align: center; margin-top: 100px;">
+        <label style="text-align: center; color: white; font-size:larger;">Task Description:</label>
+        <input type="text" name="description" style=" background-color: black; color: white;" required><br>
+        <button type="submit" style="text-align: center; margin-top: 50px; border-color: black; font-size:large;">Add Task</button>
+    </form>
+
+    <!-- List of tasks -->
+     <div style=" display: flex; justify-content: center;">
+         <ul style="margin-top: 55px; list-style: none;">
+             <% tasks.forEach(task => { %>
+                 <li style="margin-top: 50px;">
+                     <form action="/tasks/<%= task._id %>/toggle" method="POST" style="display:inline; ">
+                         <input type="checkbox" name="completed" class="checkbox"
+                             <%= task.completed ? 'checked' : '' %> 
+                             onchange="this.form.submit()">
+                         <label style="margin-left: 9px; font-size:larger;"><%= task.description %></label>
+                     </form>
+                     <form action="/tasks/<%= task._id %>/delete" method="POST" style="display:inline;">
+                         <button type="submit" style=" margin-left: 80px; border-color: black; font-size:smaller;">Delete</button>
+                     </form>
+                         <a href="/tasks/<%= task._id %>/edit" style="color:white; text-decoration-color: black; font-size:larger; margin-left: 25px;">Edit</a>
+                 </li>
+             <% }) %>
+         </ul>
+     </div>
+    <!-- List of completed tasks --> 
+    <h2 style="text-align: center; margin-top: 100px; font-style: italic; ">Completed Tasks</h2> 
+    <ul  style="list-style: none;" > 
+        <% tasks.forEach(task => { %> 
+            <% if (task.completed) { %> 
+                <li style="text-align: center; margin-top: 50px;"> 
+                    <form action="/tasks/<%= task._id %>/toggle" method="POST" style="display:inline;"> 
+                        <input type="checkbox" name="completed"  class="checkbox"
+                            <%= task.completed ? 'checked' : '' %>  
+                            onchange="this.form.submit()"> 
+                        <label style="margin-left: 9px; font-size:larger;"><%= task.description %></label> 
+                    </form> 
+                    <form action="/tasks/<%= task._id %>/delete" method="POST" style="display:inline;"> 
+                        <button type="submit" style=" margin-left: 80px; border-color: black; font-size:smaller;">Delete</button> 
+                    </form> 
+                    <a href="/tasks/<%= task._id %>/edit" style="color:white; text-decoration-color: black; font-size:larger; margin-left: 25px;">Edit</a> 
+                </li> 
+            <% } %> 
+        <% }) %> 
+    </ul>
+    <div style="text-align: center; margin-top: 100px;">
+        <a href = "/auth/logout" style="color:white; text-decoration-color: black; font-size:larger;">Log out</a> 
+    </div>
+</body>
+</html>
