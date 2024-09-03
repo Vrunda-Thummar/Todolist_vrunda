@@ -10,22 +10,22 @@ const {
     editTask,
 } = require("../controller/task.controller");
 
-// Show all tasks - protected
+// Show all tasks 
 router.get('/', isAuthenticated, showallTasks);
 
-// Add a new task - protected
+// Add a new task 
 router.post('/', isAuthenticated, addnewTask);
 
-// Delete a task - protected
+// Delete a task 
 router.post('/:id/delete', isAuthenticated, deleteTasks);
 
-// Toggle task completion - protected 
+// Toggle task completion  
 router.post('/:id/toggle', isAuthenticated, completeTask);
 
-// Show edit form - protected
+// Show edit form 
 router.get('/:id/edit', isAuthenticated, editTask);
 
-// Update task - protected
+// Update task 
 router.post('/:id/edit', isAuthenticated, updateTask);
 
 module.exports = router;

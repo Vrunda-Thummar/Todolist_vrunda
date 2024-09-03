@@ -69,11 +69,9 @@ app.get("/", (req, res) => {
 })
 
 // Routes
-// const indexRoutes = require('./views/index');
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks');
 
-// app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 app.use('/tasks', taskRoutes);
 

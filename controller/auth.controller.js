@@ -2,7 +2,7 @@ const User = require('../model/User');
 const passport = require('passport'); 
  
 // Render the registration page 
-exports.get = (req, res) => { 
+exports.getRegister = (req, res) => { 
     res.render('register'); 
 }; 
  
