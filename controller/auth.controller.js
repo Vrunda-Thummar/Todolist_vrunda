@@ -15,7 +15,7 @@ exports.post = async (req, res) => {
         res.redirect('/auth/login'); 
     } catch (err) { 
         res.status(500).send('Server Error'); 
-    } 
+    }   
 }; 
  
 // Render the login page 
